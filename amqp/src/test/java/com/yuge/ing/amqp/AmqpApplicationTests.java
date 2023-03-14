@@ -1,6 +1,7 @@
 package com.yuge.ing.amqp;
 
-import com.yuge.ing.amqp.message.ScheduleMessage;
+import com.yuge.ing.amqp.direct.DirectConfig;
+import com.yuge.ing.amqp.message.SmsMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +15,11 @@ class AmqpApplicationTests {
 
     @Resource
     private AmqpTemplate amqpTemplate;
+
     @Test
     void contextLoads() throws InterruptedException {
-        ScheduleMessage scheduleMessage = new ScheduleMessage().setPlanId(111L);
-        amqpTemplate.convertAndSend(AmqpConfig.SCHEDULE_EXCHANGE, AmqpConfig.SCHEDULE_ROUTING_KEY, scheduleMessage);
+        SmsMessage smsMessage = new SmsMessage().setPhone("11111");
+        amqpTemplate.convertAndSend(DirectConfig.DIRECT_EXCHANGE, DirectConfig.DIRECT_DEFAULT_ROUTING_KEY, smsMessage);
 
         CountDownLatch countDownLatch = new CountDownLatch(1);
         countDownLatch.await(1, TimeUnit.MINUTES);
