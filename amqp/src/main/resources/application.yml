@@ -4,7 +4,9 @@ spring:
     port: 5672
     username: admin
     password: Aa135790
+    #channelRpcTimeout: PT30S
     listener:
+      # listener容器类型（simple、direct）
       type: simple
       simple:
         acknowledge-mode: manual

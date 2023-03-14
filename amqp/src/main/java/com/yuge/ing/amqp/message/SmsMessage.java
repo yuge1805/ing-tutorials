@@ -9,11 +9,10 @@ import lombok.experimental.Accessors;
  **/
 @Data
 @Accessors(chain = true)
-public class ScheduleMessage {
+public class SmsMessage {
 
-    /**
-     * planId
-     */
-    private Long planId;
+    private String phone;
+
+    private String content;
     
 }
