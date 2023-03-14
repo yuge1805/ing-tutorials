@@ -3,7 +3,7 @@ package com.yuge.ing.mybatisplus.generation;
 public class CodeGenerator {
 
     public static void main(String[] args) {
-        qt_course();
+        qt();
     }
 
     private static void local() {
@@ -23,18 +23,17 @@ public class CodeGenerator {
 
     private static void qt() {
         DataSourceInfo info = new DataSourceInfo(
-                "jdbc:mysql://127.0.0.1:3307/szxy_course_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
-                "root",
-                "root");
+                "jdbc:mysql://172.16.110.67:3306/szxy_curriculum_arrangement?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
+                "curriculum",
+                "curriculum$123");
         CodeGenerationUtil.generation(
-                "cn.qtone.ecampus.course",
+                "cn.qtone.ecampus.curriculum.arrangement",
                 info,
                 "zhangbw",
                 "E:\\Program Files\\Qt-Workspace\\tmp\\src\\main\\java",
                 "E:\\Program Files\\Qt-Workspace\\tmp\\src\\main\\resources\\mappers",
-                "cm_",
-                "cm_choose_plan");
-        // "cm_choose_plan", "cm_choose_plan_item", "cm_choose_limit", "cm_choose_course_time"
+                "cas_",
+                "cas_schedule_task");
     }
 
     private static void qt_evaluation() {
@@ -64,7 +63,7 @@ public class CodeGenerator {
                 "E:\\Program Files\\Qt-Workspace\\tmp\\src\\main\\java",
                 "E:\\Program Files\\Qt-Workspace\\tmp\\src\\main\\resources\\mappers",
                 "cm_",
-                "cm_choose_result");
+                "cm_choose_plan_item");
     }
 
     private static void qt_survey() {
