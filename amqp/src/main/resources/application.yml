@@ -5,6 +5,12 @@ spring:
     username: admin
     password: Aa135790
     #channelRpcTimeout: PT30S
+    # 发布-确认
+    # publiser-confirm模式可以确保生产者到交换器exchange消息有没有发送成功
+    publisher-confirm-type: CORRELATED
+    # 发布-返回
+    # publisher-return模式可以在消息没有被路由到指定的queue时将消息返回，而不是丢弃
+    publisher-returns: true
     listener:
       # listener容器类型（simple、direct）
       type: simple
@@ -13,3 +19,4 @@ spring:
         concurrency: 5
         max-concurrency: 20
         prefetch: 1
+

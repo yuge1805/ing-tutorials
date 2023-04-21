@@ -31,17 +31,18 @@ public class DirectProducer {
 
     @PostConstruct
     public void intMessage() {
-        scheduledExecutorService.schedule(() -> {
-            log.info("direct producer start.");
-            IntStream.range(0, messageNumber)
-                    .forEach(value -> {
-                        SmsMessage smsMessage = new SmsMessage()
-                                .setPhone(String.valueOf(value))
-                                .setContent(String.valueOf(value));
-                        amqpTemplate.convertAndSend(DirectConfig.DIRECT_EXCHANGE, DirectConfig.DIRECT_DEFAULT_ROUTING_KEY, smsMessage);
-                    });
-            log.info("direct producer end.");
-        }, 30, TimeUnit.SECONDS);
+//        scheduledExecutorService.schedule(() -> {
+//            log.info("direct producer start.");
+//            IntStream.range(0, messageNumber)
+//                    .forEach(value -> {
+//                        SmsMessage smsMessage = new SmsMessage()
+//                                .setPhone(String.valueOf(value))
+//                                .setContent(String.valueOf(value));
+//                        log.info("produce [{}]", smsMessage);
+//                        amqpTemplate.convertAndSend(DirectConfig.DIRECT_EXCHANGE, DirectConfig.DIRECT_DEFAULT_ROUTING_KEY, smsMessage);
+//                    });
+//            log.info("direct producer end.");
+//        }, 30, TimeUnit.SECONDS);
     }
 
 

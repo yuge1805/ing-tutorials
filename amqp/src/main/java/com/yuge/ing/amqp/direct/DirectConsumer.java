@@ -31,14 +31,14 @@ public class DirectConsumer {
      *  此时：监听者容器concurrency为1，max-concurrency为20
      *
      */
-//    @SneakyThrows
+    @SneakyThrows
 //    @RabbitListener(queues = DirectConfig.DIRECT_QUEUE, concurrency = "1-1")
-//    public void listen(SmsMessage smsMessage, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
-//        log.info("direct consumer start: {}", smsMessage.getPhone());
-//        Thread.sleep(6000);
-//        channel.basicAck(deliveryTag, false);
-//        log.info("direct consumer end: {}", smsMessage.getPhone());
-//    }
+    public void listen(SmsMessage smsMessage, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
+        log.info("direct consumer start: {}", smsMessage.getPhone());
+        Thread.sleep(6000);
+        channel.basicAck(deliveryTag, false);
+        log.info("direct consumer end: {}", smsMessage.getPhone());
+    }
 
 
     @SneakyThrows
