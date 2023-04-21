@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
+ * 交互机存在，无法找到消息队列时返回
+ *
  * @author: yuge
  * @date: 2023/4/13
  **/

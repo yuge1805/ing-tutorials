@@ -6,6 +6,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 /**
+ * 交换机不正确时，消息返回
+ *
  * @author: yuge
  * @date: 2023/4/13
  **/
