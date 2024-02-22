@@ -88,4 +88,32 @@ public class GSqlParserTemplate {
         System.out.println(xml);
     }
 
+    @Test
+    public void testSqlB() {
+        String sql = "\tINSERT INTO `cur_arrangement`.`cas_subject_extend` ( `subjectId`, `gradeIdArray`, `semesterArray`, `schoolId` ) \n" +
+                "\tSELECT\n" +
+                "\t`id`,\n" +
+                "\t`grade_id`,\n" +
+                "\t`semester`,\n" +
+                "\t`schoolId` \n" +
+                "\tFROM\n" +
+                "\t`course_manage`.`cm_course`";
+        String xml = analyze(sql);
+        System.out.println(xml);
+    }
+
+    @Test
+    public void testSqlC() {
+        String sql = "\tINSERT INTO `cas_subject_extend` ( `subjectId`, `gradeIdArray`, `semesterArray`, `schoolId` ) \n" +
+                "\tSELECT\n" +
+                "\t`id`,\n" +
+                "\t`grade_id`,\n" +
+                "\t`semester`,\n" +
+                "\t`schoolId` \n" +
+                "\tFROM\n" +
+                "\t`cm_course`";
+        String xml = analyze(sql);
+        System.out.println(xml);
+    }
+
 }
