@@ -3,6 +3,7 @@ package com.yuge.ing.neo4j.iddemo;
 import com.yuge.ing.neo4j.constants.LineageConstants.NodeType;
 import com.yuge.ing.neo4j.constants.LineageConstants.RelationshipType;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 import org.springframework.data.neo4j.core.schema.Relationship.Direction;
@@ -13,6 +14,7 @@ import org.springframework.data.neo4j.core.schema.Relationship.Direction;
  **/
 @Node(NodeType.DATABASE)
 @Data
+@Accessors(chain = true)
 public class DatabaseNode extends BaseNode {
 
     /**

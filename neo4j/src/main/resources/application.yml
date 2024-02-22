@@ -6,4 +6,4 @@ spring:
       password: neo4j111
   data:
     neo4j:
-      database: neo4j
+      database: west

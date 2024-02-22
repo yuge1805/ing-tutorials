@@ -10,10 +10,8 @@ import java.util.List;
  * @date: 2024/1/18
  **/
 @Repository
-public interface DatabaseRepository extends Neo4jRepository<DatabaseNode, String> {
+public interface TableRepository extends Neo4jRepository<TableNode, String> {
 
-    DatabaseNode findByDataSourceNameAndName(String dataSourceName, String name);
-
-    List<DatabaseNode> findByName(String name);
+    TableNode findByName(String name);
 
 }

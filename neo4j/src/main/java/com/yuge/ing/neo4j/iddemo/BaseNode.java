@@ -1,8 +1,9 @@
 package com.yuge.ing.neo4j.iddemo;
 
+import com.yuge.ing.neo4j.generate.UUIDGenerator;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
 
 /**
  * @author: yuge
@@ -12,7 +13,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 public class BaseNode {
 
     @Id
-    @GeneratedValue
-    protected Long id;
+    @GeneratedValue(value = UUIDGenerator.class)
+    protected String pk;
 
 }

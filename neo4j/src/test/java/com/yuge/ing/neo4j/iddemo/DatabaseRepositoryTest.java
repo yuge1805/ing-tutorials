@@ -28,11 +28,14 @@ class DatabaseRepositoryTest {
 
     @Test
     public void testAddDatabase() {
-//        DataSourceNode dataSourceNode = new DataSourceNode("test");
-//
-//        DatabaseNode databaseNode = new DatabaseNode("testDb", dataSourceNode);
-//        databaseRepository.save(databaseNode);
-//        System.out.println(databaseNode);
+        DataSourceNode dataSourceNode = new DataSourceNode();
+//        dataSourceNode.setId(3L);
+
+        DatabaseNode databaseNode = new DatabaseNode();
+        databaseNode.setName("testDb");
+        databaseNode.setDataSource(dataSourceNode);
+        databaseRepository.save(databaseNode);
+        System.out.println(databaseNode);
     }
 
     @Test

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @date: 2024/1/18
  **/
 @Repository
-public interface DataSourceRepository extends Neo4jRepository<DataSourceNode, Long> {
+public interface DataSourceRepository extends Neo4jRepository<DataSourceNode, String> {
 
 
 }

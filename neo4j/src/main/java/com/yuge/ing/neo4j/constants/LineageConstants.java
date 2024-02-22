@@ -28,6 +28,8 @@ public class LineageConstants {
 
         public static final String BELONG_TO = "BELONG_TO";
 
+        public static final String DATA_FLOW = "DATA_FLOW";
+
     }
 
 
