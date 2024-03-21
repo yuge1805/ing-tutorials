@@ -1,4 +1,4 @@
-package com.yuge.ing.jackson.date.dto;
+package com.yuge.ing.jackson.date.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -7,12 +7,14 @@ import java.time.LocalDateTime;
 
 /**
  * @author: yuge
- * @date: 2022/12/15
+ * @date: 2022/12/14
  **/
 @Data
-public class DateDTO {
+public class LocalDateTimeVO {
 
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime localDateTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime localDateTimeWithFormat;
 
 }
