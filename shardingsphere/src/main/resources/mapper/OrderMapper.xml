@@ -14,4 +14,19 @@
         order_id, user_id, status
     </sql>
 
+    <select id="queryVoByPage" resultType="com.yuge.ing.shardingsphere.vo.OrderVO">
+        SELECT
+            o.order_id,
+            o.user_id,
+            o.status,
+            u.name username
+        FROM
+            t_order o
+            JOIN t_user u ON o.user_id = u.id
+        WHERE 1 = 1
+        <if test="q.status != null and q.status != ''">
+            AND o.status LIKE concat('%', #{q.status}, '%')
+        </if>
+    </select>
+
 </mapper>

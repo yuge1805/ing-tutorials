@@ -42,9 +42,8 @@ public class OrderController {
      * @return
      */
     @PostMapping
-    public CommonResult<Boolean> add(@RequestBody @Validated OrderDTO orderDTO) {
-        orderBusinessService.add(orderDTO);
-        return CommonResult.success(true);
+    public CommonResult<Long> add(@RequestBody @Validated OrderDTO orderDTO) {
+        return CommonResult.success(orderBusinessService.add(orderDTO));
     }
 
     /**

@@ -1,12 +1,16 @@
 package com.yuge.ing.shardingsphere.business.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yuge.ing.shardingsphere.business.OrderBusinessService;
 import com.yuge.ing.shardingsphere.condition.OrderCondition;
 import com.yuge.ing.shardingsphere.converter.OrderConverter;
+import com.yuge.ing.shardingsphere.converter.OrderItemConverter;
 import com.yuge.ing.shardingsphere.dto.OrderDTO;
 import com.yuge.ing.shardingsphere.dto.OrderPageQuery;
 import com.yuge.ing.shardingsphere.entity.Order;
+import com.yuge.ing.shardingsphere.entity.OrderItem;
+import com.yuge.ing.shardingsphere.service.IOrderItemService;
 import com.yuge.ing.shardingsphere.service.IOrderService;
 import com.yuge.ing.shardingsphere.vo.OrderVO;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  *  业务
@@ -32,6 +38,8 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
 
     private final IOrderService orderService;
 
+    private final IOrderItemService orderItemService;
+
     /**
      * 新增
      *
@@ -40,10 +48,22 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void add(OrderDTO orderDTO) {
+    public Long add(OrderDTO orderDTO) {
         this.checkAdd(orderDTO);
         Order addEntity = OrderConverter.INSTANCE.dtoToPo(orderDTO);
         orderService.save(addEntity);
+        List<OrderItem> orderItemList = IntStream.rangeClosed(0, 2)
+                .boxed()
+                .map(operand -> {
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.setOrderId(addEntity.getOrderId());
+                    orderItem.setUserId(addEntity.getUserId());
+                    orderItem.setStatus(operand.toString());
+                    return orderItem;
+                })
+                .collect(Collectors.toList());
+        orderItemService.saveBatch(orderItemList);
+        return addEntity.getOrderId();
     }
 
     /**
@@ -109,10 +129,12 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
      */
     @Override
     public IPage<OrderVO> page(OrderPageQuery pageQuery) {
+//        OrderCondition orderCondition = OrderConverter.INSTANCE.queryToCondition(pageQuery);
+//        IPage<Order> page = orderService.queryByPage(orderCondition);
+//        IPage<OrderVO> resultPage = OrderConverter.INSTANCE.poToVo(page);
+//        return resultPage;
         OrderCondition orderCondition = OrderConverter.INSTANCE.queryToCondition(pageQuery);
-        IPage<Order> page = orderService.queryByPage(orderCondition);
-        IPage<OrderVO> resultPage = OrderConverter.INSTANCE.poToVo(page);
-        return resultPage;
+        return orderService.queryVoByPage(orderCondition);
     }
 
     /**
@@ -128,6 +150,8 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
             throw new RuntimeException("数据不存在！");
         }
         OrderVO entityVO = OrderConverter.INSTANCE.poToVo(o);
+        List<OrderItem> itemList = orderItemService.queryByOrderId(o.getOrderId(), o.getUserId());
+        entityVO.setItems(OrderItemConverter.INSTANCE.poToVo(itemList));
         return entityVO;
     }
 

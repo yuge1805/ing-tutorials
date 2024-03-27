@@ -4,6 +4,7 @@ import com.yuge.ing.shardingsphere.condition.OrderCondition;
 import com.yuge.ing.shardingsphere.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.yuge.ing.shardingsphere.vo.OrderVO;
 
 /**
  * <p>
@@ -22,5 +23,13 @@ public interface IOrderService extends IService<Order> {
     * @return
     */
     IPage<Order> queryByPage(OrderCondition orderCondition);
+
+    /**
+     * query vo by page
+     *
+     * @param orderCondition
+     * @return
+     */
+    IPage<OrderVO> queryVoByPage(OrderCondition orderCondition);
 
 }

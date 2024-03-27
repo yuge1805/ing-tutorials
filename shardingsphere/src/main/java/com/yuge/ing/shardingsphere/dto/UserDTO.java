@@ -14,7 +14,6 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
 
-    @JsonIgnore
     private Long id;
 
     private String name;

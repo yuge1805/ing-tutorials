@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 
@@ -20,6 +21,10 @@ public class OrderVO {
 
     private Long userId;
 
+    private String username;
+
     private String status;
+
+    private List<OrderItemVO> items;
 
 }

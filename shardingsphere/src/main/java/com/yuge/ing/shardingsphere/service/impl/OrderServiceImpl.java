@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yuge.ing.shardingsphere.vo.OrderVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         LambdaQueryWrapper<Order> queryWrapper = getQueryWrapper(orderCondition);
         IPage<Order> result = this.page(page, queryWrapper);
         return result;
+    }
+
+    /**
+     * query vo by page
+     *
+     * @param orderCondition
+     * @return
+     */
+    @Override
+    public IPage<OrderVO> queryVoByPage(OrderCondition orderCondition) {
+        Page page = new Page<>(orderCondition.getPageNum(), orderCondition.getPageSize());
+        page.addOrder(OrderItem.desc("order_id"));
+        page.setOptimizeJoinOfCountSql(false);
+        return getBaseMapper().queryVoByPage(page, orderCondition);
     }
 
     private static LambdaQueryWrapper<Order> getQueryWrapper(OrderCondition condition) {

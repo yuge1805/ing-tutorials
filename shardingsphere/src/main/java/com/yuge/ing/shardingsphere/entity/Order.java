@@ -20,7 +20,7 @@ import lombok.Setter;
 @TableName("t_order")
 public class Order {
 
-    @TableId(value = "order_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "order_id")
     private Long orderId;
 
     @TableField("user_id")
@@ -28,4 +28,5 @@ public class Order {
 
     @TableField("status")
     private String status;
+
 }

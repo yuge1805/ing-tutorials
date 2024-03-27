@@ -5,6 +5,8 @@ import com.yuge.ing.shardingsphere.entity.OrderItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -22,5 +24,9 @@ public interface IOrderItemService extends IService<OrderItem> {
     * @return
     */
     IPage<OrderItem> queryByPage(OrderItemCondition orderItemCondition);
+
+    List<OrderItem> queryByOrderId(Long orderId);
+
+    List<OrderItem> queryByOrderId(Long orderId, Long userId);
 
 }

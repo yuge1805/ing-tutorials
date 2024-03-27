@@ -11,6 +11,7 @@ import com.yuge.ing.shardingsphere.service.IOrderItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -36,6 +37,18 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
         LambdaQueryWrapper<OrderItem> queryWrapper = getQueryWrapper(orderItemCondition);
         IPage<OrderItem> result = this.page(page, queryWrapper);
         return result;
+    }
+
+    @Override
+    public List<OrderItem> queryByOrderId(Long orderId) {
+        return this.lambdaQuery().eq(OrderItem::getOrderId, orderId).list();
+    }
+
+    @Override
+    public List<OrderItem> queryByOrderId(Long orderId, Long userId) {
+        return this.lambdaQuery().eq(OrderItem::getOrderId, orderId)
+                .eq(OrderItem::getUserId, userId)
+                .list();
     }
 
     private static LambdaQueryWrapper<OrderItem> getQueryWrapper(OrderItemCondition condition) {

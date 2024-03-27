@@ -21,7 +21,7 @@ public interface OrderBusinessService {
      * @param orderDTO
      * @return 主键
      */
-    void add(OrderDTO orderDTO);
+    Long add(OrderDTO orderDTO);
 
     /**
      * 编辑
