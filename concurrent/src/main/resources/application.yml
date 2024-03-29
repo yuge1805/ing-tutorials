@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  redis:
+    host: ${ZING_REDIS}
+    port: 6379
+    password: ${ZING_REDIS_PW}
+    timeout: "PT60S"
+    lettuce:
+      pool:
+        max-active: 200
+        max-wait: "PT30S"
+        max-idle: 20
+        min-idle: 3
+        time-between-eviction-runs: "PT60S"
