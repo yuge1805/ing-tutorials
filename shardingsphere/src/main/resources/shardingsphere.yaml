@@ -107,6 +107,9 @@ rules:
         shardingAlgorithmName: database_inline
     defaultTableStrategy:
       none:
+    defaultKeyGenerateStrategy:
+      column: id
+      keyGeneratorName: snowflake
 
     # 分片算法配置
     shardingAlgorithms:
@@ -156,9 +159,17 @@ rules:
         # 分片审计算法类型
         type: DML_SHARDING_CONDITIONS
 
+    # 广播表
   - !BROADCAST
     tables:
-      - t_address
+      - t_broadcast_table
+
+    # 单表
+  - !SINGLE
+    tables:
+      - ds.t_single_table
+    # 默认数据源，仅在执行 CREATE TABLE 创建单表时有效。缺失值为空，表示随机单播路由
+    defaultDataSource: ds
 
 props:
   sql-show: true
