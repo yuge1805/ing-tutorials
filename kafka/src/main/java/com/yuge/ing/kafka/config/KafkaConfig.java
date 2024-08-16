@@ -20,7 +20,8 @@ public class KafkaConfig {
     public NewTopic topicObject() {
         return TopicBuilder.name(TOPIC_OBJECT)
                 .partitions(3)
-                .replicas(1)
+                // broker只有1个时，无法创建副本
+//                .replicas(1)
                 .build();
     }
 
@@ -28,7 +29,7 @@ public class KafkaConfig {
     public NewTopic topicString() {
         return TopicBuilder.name(TOPIC_STRING)
                 .partitions(3)
-                .replicas(1)
+//                .replicas(1)
                 .build();
     }
 

@@ -5,17 +5,45 @@ spring:
     name: kafka
   # org.springframework.boot.autoconfigure.kafka.KafkaProperties
   kafka:
-    bootstrap-servers: 172.16.110.173:9092,172.16.110.174:9092,172.16.110.175:9092
+#    bootstrap-servers: 172.16.110.173:9092,172.16.110.174:9092,172.16.110.175:9092
+    bootstrap-servers: 47.109.55.95:29092
+    # 生产者配置
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      # 重试次数
+      retries: 0
+      # 应答级别：多少个分区副本备份完成时向生产者发送ack确认(可选0、1、all/-1)
+      acks: 1
+      # 批量发送大小
+      batch-size: 16384
+      properties:
+        # 提交延时
+        # 当生产端积累的消息达到batch-size或接收到消息linger.ms后,生产者就会将消息提交给kafka
+        # linger.ms为0表示每接收到一条消息就提交给kafka,这时候batch-size其实就没用了
+        linger.ms: 0
+      # 生产端缓冲区大小
+      buffer-memory: 33554432
+    # 消费者配置
     consumer:
+      # 当kafka中没有初始offset或offset超出范围时，将自动重置offset
+      # earliest:重置为分区中最小的offset;
+      # latest:重置为分区中最新的offset(消费分区中新产生的数据);
+      # none:只要有一个分区不存在已提交的offset,就抛出异常;
       auto-offset-reset: earliest
-      group-id: myGroup
+      # 是否自动提交offset
+      enable-auto-commit: false
+      # 默认的消费组ID
+      group-id: myGroup_c2
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "com.yuge.ing.kafka.model"
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    listener:
+      # 手动提交
+      ack-mode: manual_immediate
+      # 设置单个消费、批量消费
+      type: single
 
 
 

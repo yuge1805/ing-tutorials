@@ -17,8 +17,8 @@ public class KafkaStringProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void send(MsgDTO dto) {
-        kafkaTemplate.send(dto.getTopic(), dto.getMessage());
+    public void send(String topic, String key, String message) {
+        kafkaTemplate.send(topic, key, message);
     }
 
 }

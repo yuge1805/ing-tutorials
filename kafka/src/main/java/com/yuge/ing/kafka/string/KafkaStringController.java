@@ -26,10 +26,10 @@ public class KafkaStringController {
 
     @PostMapping
     public String send(@RequestBody MsgDTO dto) {
-        String message = Optional.ofNullable(dto.getMessage()).orElse("");
-        dto.setMessage(message.concat(new Date().toString()));
-        dto.setTopic(Optional.ofNullable(dto.getTopic()).orElse(TOPIC_STRING));
-        kafkaStringProducer.send(dto);
+        for (int i = 0; i < 10; i++) {
+            String msg = dto.getKey() + "-" + i + dto.getMessage() + new Date().toString();
+            kafkaStringProducer.send(TOPIC_STRING, dto.getKey(), msg);
+        }
         return "success";
     }
 
@@ -38,6 +38,8 @@ public class KafkaStringController {
     public static class MsgDTO {
 
         private String topic;
+
+        private String key;
 
         private String message;
 
