@@ -1,5 +1,6 @@
 package com.yuge.ing.mybatisplus.generation;
 
+@Deprecated
 public class CodeGenerator {
 
     public static void main(String[] args) {

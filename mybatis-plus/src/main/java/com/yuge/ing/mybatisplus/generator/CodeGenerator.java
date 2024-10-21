@@ -15,7 +15,10 @@ import java.io.File;
 public class CodeGenerator {
 
     public static void main(String[] args) {
-        shardingsphere();
+//        sdty();
+//        cr();
+//        portal_website();
+        basedata();
     }
 
 
@@ -48,7 +51,73 @@ public class CodeGenerator {
                 .setJavaOutputDir(javaOutputDir)
                 .setXmlOutputDir(xmlOutputDir)
                 .setPrefix("")
-                .setTableNames(Lists.newArrayList("cas_tuning_record"));
+                .setTableNames(Lists.newArrayList("cas_push_record"));
+        CodeGenerationUtil.generation(generationParam);
+    }
+
+    private static void portal_website() {
+        String projectPath = System.getProperty("user.dir");
+        projectPath = "D:\\Program Files\\Qt-Workspace\\tmp2\\portal";
+        // 修改为对应module、package
+        String moduleName = "";
+        String modulePackage = "";
+        if (StringUtils.isNotBlank(moduleName)) {
+            projectPath = projectPath.concat(File.separator).concat(moduleName);
+        }
+        projectPath = projectPath.concat(File.separator).concat("src")
+                .concat(File.separator).concat("main")
+                .concat(File.separator);
+        String javaOutputDir = projectPath.concat("java");
+        String xmlOutputDir = projectPath.concat("resources")
+                .concat(File.separator).concat("mapper");
+        if (StringUtils.isNotBlank(modulePackage)) {
+            xmlOutputDir.concat(File.separator).concat(modulePackage);
+        }
+        DataSourceInfo info = new DataSourceInfo(
+                "jdbc:mysql://192.168.1.64:3306/szxydb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
+                "szxy",
+                "Qtone*2023");
+        GenerationParam generationParam = new GenerationParam()
+                .setRootPackage("cn.qtone.ecampus.portal")
+                .setDataSourceInfo(info)
+                .setAuthor("zhangbw")
+                .setJavaOutputDir(javaOutputDir)
+                .setXmlOutputDir(xmlOutputDir)
+                .setPrefix("")
+                .setTableNames(Lists.newArrayList("mh_digital_government_third_user_apply"));
+        CodeGenerationUtil.generation(generationParam);
+    }
+
+    private static void basedata() {
+        String projectPath = System.getProperty("user.dir");
+        projectPath = "D:\\Program Files\\Qt-Workspace\\tmp2\\basedata";
+        // 修改为对应module、package
+        String moduleName = "";
+        String modulePackage = "";
+        if (StringUtils.isNotBlank(moduleName)) {
+            projectPath = projectPath.concat(File.separator).concat(moduleName);
+        }
+        projectPath = projectPath.concat(File.separator).concat("src")
+                .concat(File.separator).concat("main")
+                .concat(File.separator);
+        String javaOutputDir = projectPath.concat("java");
+        String xmlOutputDir = projectPath.concat("resources")
+                .concat(File.separator).concat("mapper");
+        if (StringUtils.isNotBlank(modulePackage)) {
+            xmlOutputDir.concat(File.separator).concat(modulePackage);
+        }
+        DataSourceInfo info = new DataSourceInfo(
+                "jdbc:mysql://192.168.1.64:3306/szxydb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
+                "szxy",
+                "Qtone*2023");
+        GenerationParam generationParam = new GenerationParam()
+                .setRootPackage("cn.qtone.ecampus.basedata")
+                .setDataSourceInfo(info)
+                .setAuthor("zhangbw")
+                .setJavaOutputDir(javaOutputDir)
+                .setXmlOutputDir(xmlOutputDir)
+                .setPrefix("")
+                .setTableNames(Lists.newArrayList("uc_jyeoo_teacher"));
         CodeGenerationUtil.generation(generationParam);
     }
 
@@ -71,7 +140,7 @@ public class CodeGenerator {
             xmlOutputDir.concat(File.separator).concat(modulePackage);
         }
         DataSourceInfo info = new DataSourceInfo(
-                "jdbc:mysql://my.ing:13306/ds_0?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
+                "jdbc:mysql://127.0.0.1:3306/ds?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
                 "root",
                 "root");
         GenerationParam generationParam = new GenerationParam()
@@ -81,7 +150,40 @@ public class CodeGenerator {
                 .setJavaOutputDir(javaOutputDir)
                 .setXmlOutputDir(xmlOutputDir)
                 .setPrefix("t_")
-                .setTableNames(Lists.newArrayList("t_order", "t_order_item", "t_user"));
+                .setTableNames(Lists.newArrayList("t_single_table"));
+        CodeGenerationUtil.generation(generationParam);
+    }
+
+    private static void sdty() {
+        String projectPath = System.getProperty("user.dir");
+        projectPath = "D:\\Program Files\\Qt-Workspace\\tmp2\\sdty";
+        // 修改为对应module、package
+        String moduleName = "";
+        String modulePackage = "";
+        if (StringUtils.isNotBlank(moduleName)) {
+            projectPath = projectPath.concat(File.separator).concat(moduleName);
+        }
+        projectPath = projectPath.concat(File.separator).concat("src")
+                .concat(File.separator).concat("main")
+                .concat(File.separator);
+        String javaOutputDir = projectPath.concat("java");
+        String xmlOutputDir = projectPath.concat("resources")
+                .concat(File.separator).concat("mapper");
+        if (StringUtils.isNotBlank(modulePackage)) {
+            xmlOutputDir.concat(File.separator).concat(modulePackage);
+        }
+        DataSourceInfo info = new DataSourceInfo(
+                "jdbc:mysql://172.16.110.129:3306/gym?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
+                "gym",
+                "gym123");
+        GenerationParam generationParam = new GenerationParam()
+                .setRootPackage("cn.qtone.gym.basedata")
+                .setDataSourceInfo(info)
+                .setAuthor("zhangbw")
+                .setJavaOutputDir(javaOutputDir)
+                .setXmlOutputDir(xmlOutputDir)
+                .setPrefix("")
+                .setTableNames(Lists.newArrayList("gym_bd_account_app"));
         CodeGenerationUtil.generation(generationParam);
     }
 
