@@ -72,9 +72,10 @@ public class KafkaObjectController {
         message = message.concat(new Date().toString());
         String topic = Optional.ofNullable(dto.getTopic()).orElse(TOPIC_OBJECT);
         IngCustomMessage ingCustomMessage = new IngCustomMessage("xxx", message);
+        String key = ingCustomMessage.getMsgType();
         // Non blocking
         try {
-            ListenableFuture<SendResult<String, IngCustomMessage>> listenableFuture = kafkaTemplate.send(topic, ingCustomMessage);
+            ListenableFuture<SendResult<String, IngCustomMessage>> listenableFuture = kafkaTemplate.send(topic, key, ingCustomMessage);
             listenableFuture.addCallback(new KafkaSendCallback<String, IngCustomMessage>() {
                 @Override
                 public void onSuccess(SendResult<String, IngCustomMessage> result) {
